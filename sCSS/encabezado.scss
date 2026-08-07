@@ -1,0 +1,27 @@
+#encabezado {
+    text-align: center;
+    background-color:#fcbf49;
+    color: #1d1d1d;
+    padding: 20px;
+    nav ul {
+        
+         display: flex;
+        justify-content: center;
+        gap: 30px;
+        list-style: none;
+        padding: 0;
+    }
+    a{
+       
+        color:#1d1d1d;
+        text-decoration: none;
+        font-weight: bold;
+       transition: 0.3s;
+
+       &:hover{
+        color:#d62828; 
+        
+       }
+      
+    }
+}

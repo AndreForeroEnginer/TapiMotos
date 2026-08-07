@@ -1,0 +1,25 @@
+.btn-regresar{
+
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #d62828;
+    color: white;
+    padding: 12px 18px ;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+
+    transition: 0.3s;
+
+    &:hover{
+        background: darken(red, 10%);
+    }
+    a{
+   text-decoration: none !important;
+    }
+}
+
+.boton_producto{
+    text-decoration: none;
+}

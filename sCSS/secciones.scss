@@ -1,0 +1,65 @@
+.galeria {
+    padding: 50px;
+    background: rgb(255, 255, 255);
+    h2{
+        text-align: center;
+        margin-bottom: 30px;
+        color: #d62828; 
+    }
+.oculto{
+  display: none;
+}
+
+    
+    .contenedor_producto{
+
+        
+        
+        display: grid;
+        grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+        justify-content: center;
+        gap: 70px;
+        
+    }
+    .card_funcional{
+      text-decoration: none;
+
+    }
+  .productos {
+    
+    text-decoration: none;
+     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background:white;
+    overflow: hidden;
+    border-radius: 12px;
+    transition:all 0.3 ease;
+      
+
+
+    &:hover{
+        transform: translateY(-8px);
+        box-shadow: 0 10px 25px  rgba(0,0,0,0.2);
+    }
+    
+    img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover; 
+     
+
+    }
+
+    h3 {
+      margin: 15px 0 5px;
+      color:#1d1d1d;
+    }
+
+    p {
+      color: gray;
+      margin-bottom: 15px;
+    }
+   
+
+  }
+}
+

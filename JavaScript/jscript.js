@@ -18,6 +18,16 @@ marca.addEventListener("change", function(){
 
 const buscar= document.querySelector("#buscar");
 
+buscar.addEventListener("input", function(){
+    const texto = buscar.value.toLowerCase();
+    const resultado = Productos.filter(function(producto){
+        return producto.nombre.toLowerCase().includes(texto);
+    });
+
+    mostrarProductos(resultado);
+
+});
+
 buscar.addEventListener("keydown", function(evento){
     console.log(evento.key);
 });
@@ -79,10 +89,19 @@ const Productos = [
     
 ];
 
+
 const contenedor =document.querySelector(".contenedor_producto");
-
-    Productos.forEach(function(producto){
-
+    
+    function mostrarProductos(lista){
+        contenedor.innerHTML="";
+        if(lista.length ===0){
+            contenedor.innerHTML=`
+            <p>no encontramos productos.</p>
+            `;
+            return;
+        }
+        lista.forEach(function(producto){
+        
         contenedor.innerHTML += `
             <article class="productos">
                          <a href="ventana_producto.html?id=${producto.id}" class="card_funcional">
@@ -93,10 +112,38 @@ const contenedor =document.querySelector(".contenedor_producto");
                         <p>$${producto.precio}</p>
                     </div>
                     </a>
-                    </article>
-
-
-
-
+                    <button class="btn-carrito" data-id="${producto.id}">
+                        Agregar al carrito
+                    </button>
+            </article>
         `;
     });
+}
+
+
+mostrarProductos(Productos);
+
+
+const carrito = [];
+function agregarAlCarrito(id){
+    const producto = Productos.find(function(producto){
+
+        return producto.id === id;
+    });
+    carrito.push(producto);
+    console.log(carrito);
+}
+
+//boton de agregar al carrito de compras
+
+const boton_agregarcarrito = document.querySelectorAll(".btn-carrito");
+
+boton_agregarcarrito.forEach(function(boton){
+
+    boton.addEventListener("click", function(){
+
+        const id=Number(boton.dataset.id);
+        agregarAlCarrito(id);
+        
+    });
+});

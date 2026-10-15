@@ -55,14 +55,19 @@
 }
 .galeria .contenedor_producto {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, 220px);
   justify-content: center;
-  gap: 70px;
+  gap: 30px;
 }
 .galeria .card_funcional {
   text-decoration: none;
+  display: block;
+  width: 100%;
 }
 .galeria .productos {
+  width: 220px;
+  min: width 0;
+  box-sizing: border-box;
   text-decoration: none;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   background: white;
@@ -76,9 +81,10 @@
 }
 .galeria .productos img {
   width: 100%;
-  aspect-ratio: 4/3;
+  height: 180px;
   -o-object-fit: cover;
      object-fit: cover;
+  display: block;
 }
 .galeria .productos h3 {
   margin: 15px 0 5px;

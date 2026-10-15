@@ -118,6 +118,7 @@ const contenedor =document.querySelector(".contenedor_producto");
             </article>
         `;
     });
+    configuracionBotones();
 }
 
 
@@ -130,20 +131,84 @@ function agregarAlCarrito(id){
 
         return producto.id === id;
     });
-    carrito.push(producto);
-    console.log(carrito);
+    const productoCarrito = carrito.find(function(producto){
+
+        return producto.id===id;
+
+    });
+
+    if(productoCarrito){
+        productoCarrito.cantidad++;
+    }else{
+
+        carrito.push({
+            id:producto.id,
+            nombre:producto.nombre,
+            precio:producto.precio,
+            imagen:producto.imagen,
+            cantidad:1
+
+
+        });
+    }
+   
+    guardarCarrito();
+    actualizarCantidadCarrito();
 }
 
-//boton de agregar al carrito de compras
 
-const boton_agregarcarrito = document.querySelectorAll(".btn-carrito");
+//funcion de guardar en el carrito donde se usa localstorage para que recuerde
+//y json stringify para que traduzca objetos de la lista a texto
+function guardarCarrito(){ 
+localStorage.setItem(
+    "carrito",
+    JSON.stringify(carrito)
+);
+}
 
-boton_agregarcarrito.forEach(function(boton){
 
-    boton.addEventListener("click", function(){
 
-        const id=Number(boton.dataset.id);
-        agregarAlCarrito(id);
+
+//actualizar la cantidad del contador del carrito 
+function actualizarCantidadCarrito(){
+    const contador = document.querySelector("#contador-carrito");
+
+    if(!contador){
+        return;
+    }
+    const carritoGuardado = localStorage.getItem("carrito");
+    if(!carritoGuardado){
+        contador.textContent = 0;
+        return;
+    }
+
+const carrito = JSON.parse(carritoGuardado);
+
+    let cantidadTotal = 0;
+    carrito.forEach(function(producto){
         
+        cantidadTotal += producto.cantidad;
     });
-});
+    contador.textContent = cantidadTotal;
+}
+actualizarCantidadCarrito();
+
+function configuracionBotones(){
+    const botonesCarrito = document.querySelectorAll(".btn-carrito");
+    botonesCarrito.forEach(function(boton){
+        boton.addEventListener("click", function(){
+
+            const id = Number(boton.dataset.id);
+
+            agregarAlCarrito(id);
+
+
+
+        });
+
+
+
+    });
+
+
+}

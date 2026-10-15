@@ -59,3 +59,58 @@ precioProducto.textContent=`$${producto.precio}`;
 imagenProducto.src=producto.imagen;
 imagenProducto.alt=producto.nombre;
 
+const botonAgregar = document.querySelector("#agregarProducto");
+    botonAgregar.addEventListener("click", function(){
+
+        let carrito=[];
+        const carritoGuardado= localStorage.getItem("carrito");
+        if(carritoGuardado){
+            carrito = JSON.parse(carritoGuardado);
+
+        }
+        const productoCarrito = carrito.find(function(producto){
+
+            return producto.id === id;
+        });
+        if(productoCarrito){
+            productoCarrito.cantidad++;
+        }else{
+            carrito.push({
+
+                id: producto.id,
+                nombre: producto.nombre,
+                precio: producto.precio,
+                imagen: producto.imagen,
+                cantidad: 1
+
+            });
+        }
+        localStorage.setItem(
+            "carrito",
+            JSON.stringify(carrito)
+        );
+        actualizarCantidadCarrito();
+    });
+
+function actualizarCantidadCarrito(){
+    const contador = document.querySelector("#contador-carrito");
+
+    if(!contador){
+        return;
+    }
+    const carritoGuardado = localStorage.getItem("carrito");
+    if(!carritoGuardado){
+        contador.textContent = 0;
+        return;
+    }
+
+const carrito = JSON.parse(carritoGuardado);
+
+    let cantidadTotal = 0;
+    carrito.forEach(function(producto){
+        
+        cantidadTotal += producto.cantidad;
+    });
+    contador.textContent = cantidadTotal;
+}
+actualizarCantidadCarrito();
